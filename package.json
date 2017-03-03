@@ -1,0 +1,36 @@
+{
+  "name": "path-to-philosophy",
+  "version": "1.0.0",
+  "description": "Wikipedia Getting to Philosophy",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "1.15.2",
+    "cheerio": "0.22.0",
+    "express": "4.14.0",
+    "request": "2.78.0"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "chai-http": "3.0.0",
+    "mocha": "3.1.2"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jun2xrama/path-to-philosophy.git"
+  },
+  "keywords": [
+    "ripeconcept",
+    "code",
+    "challenge"
+  ],
+  "author": "Luciano G. Rama III",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jun2xrama/path-to-philosophy/issues"
+  },
+  "homepage": "https://github.com/jun2xrama/path-to-philosophy#readme"
+}
