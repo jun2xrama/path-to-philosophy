@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const cheerio = require('cheerio');
+const philosophyTitle = "Philosophy";
 
 const port = 8080;
 
@@ -27,10 +28,14 @@ const wikiIteration = function iterateWiki(url, callback, arr = []) {
         }
         $ = cheerio.load(html);
         title = ($('h1#firstHeading').text()).trim();
-
+		
+		if (arr.indexOf(title) > -1) {
+			return callback(409, 'Path loop detected.'); 
+		}
+		
         arr.push(title);
-
-        if (title === "Philosophy") {
+			
+        if (title === philosophyTitle) {
             return callback(200, arr);
         }
    		

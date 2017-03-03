@@ -10,7 +10,7 @@ const uriComponent = function buildUri(param) {
 chai.use(chaiHttp);
 
 describe('/GET path-to-philosophy', function() {
-	this.timeout(30000);
+	this.timeout(120000);
 
     it('it should not allow invalid URLs (wikipedia)', (done) => {
         const invalidUrl = uriComponent('something~!$');
@@ -23,19 +23,29 @@ describe('/GET path-to-philosophy', function() {
     });
 
     it('it should not allow non-existing wikipedia article links', (done) => {
-        const invalidUrl = uriComponent('https://en.wikipedia.org/wiki/None-existing-thingy');
+        const invalidArticle = uriComponent('https://en.wikipedia.org/wiki/None-existing-thingy');
         chai.request(server)
-            .get(invalidUrl)
+            .get(invalidArticle)
             .end((err, res) => {
                 res.should.have.status(404);
                 done();
             });
     });
+	
+	it('it should avoid wikipedia article links that create a loop', (done) => {
+        const pathLoop = uriComponent('https://en.wikipedia.org/wiki/Sand_fence');
+        chai.request(server)
+            .get(pathLoop)
+            .end((err, res) => {
+                res.should.have.status(409);
+                done();
+            });
+    });
 
     it('it should GET all paths leading to https://en.wikipedia.org/wiki/Philosophy', (done) => {
-        const invalidUrl = uriComponent('https://en.wikipedia.org/wiki/Wikipedia:Getting_to_Philosophy');
+        const validUrl = uriComponent('https://en.wikipedia.org/wiki/Wikipedia:Getting_to_Philosophy');
         chai.request(server)
-            .get(invalidUrl)
+            .get(validUrl)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');

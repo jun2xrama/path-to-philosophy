@@ -2,6 +2,10 @@
 <br />
 Wikipedia Getting to Philosophy
 <br />
+There is an interesting property of Wikipedia where a user can visit a random article, repeatedly follow the first link in the body of the article, and end up on the Wikipedia page on 'Philosophy'. You can read more about this property in this article: https://en.wikipedia.org/wiki/Wikipedia:Getting_to_Philosophy
+<br />
+Objective is to write an API using Node.js that will accept the URL for a random Wikipedia article and return an ordered, JSON encoded array of all the articles visited. This is the "path to philosophy".
+<br />
 Node v6.9.1 <br />
 NPM 3.10.8 <br />
 <br />
